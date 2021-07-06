@@ -1,0 +1,60 @@
+server:
+  configEnabled: true
+  config:
+    repositories: |
+      - type: git
+        url: https://github.com/openinfradev/taco-bootstrap.git
+      - name: argo-helm
+        type: helm
+        url: https://argoproj.github.io/argo-helm
+  additionalApplications:
+    - name: taco-apps
+      namespace: argo
+      destination:
+        namespace: argo
+        server: https://kubernetes.default.svc
+      project: taco-bootstrap
+      source:
+        path: taco-apps
+        repoURL: https://github.com/openinfradev/taco-bootstrap.git
+        targetRevision: HEAD
+        directory:
+          recurse: true
+          jsonnet: {}
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+    - name: taco-projects
+      namespace: argo
+      destination:
+        namespace: argo
+        server: https://kubernetes.default.svc
+      project: taco-bootstrap
+      source:
+        path: taco-projects
+        repoURL: https://github.com/openinfradev/taco-bootstrap.git
+        targetRevision: HEAD
+        directory:
+          recurse: true
+          jsonnet: {}
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+  additionalProjects:
+  - name: taco-bootstrap
+    namespace: argo
+    additionalLabels: {}
+    additionalAnnotations: {}
+    description: Project for taco-bootstrap
+    sourceRepos:
+    - '*'
+    destinations:
+    - namespace: argo
+      server: https://kubernetes.default.svc
+    clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+    orphanedResources:
+      warn: false
