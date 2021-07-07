@@ -7,8 +7,8 @@ spec:
   - group: '*'
     kind: '*'
   destinations:
-  - namespace: argo
-    server: https://kubernetes.default.svc
+  #- namespace: argo
+  - server: https://kubernetes.default.svc
   orphanedResources:
     warn: false
   sourceRepos:
