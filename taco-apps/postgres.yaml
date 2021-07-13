@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres
+  namespace: argo
+spec:
+  destination:
+    namespace: argo
+    server: https://kubernetes.default.svc
+  project: decapod-controller
+  source:
+    path: hanu-reference/decapod-controller/postgres
+    repoURL: https://github.com/openinfradev/decapod-manifests.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=false
+    automated:
+      selfHeal: true
+      prune: true
