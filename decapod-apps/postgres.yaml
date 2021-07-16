@@ -2,10 +2,10 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: postgres
-  namespace: db
+  namespace: decapod-db
 spec:
   destination:
-    namespace: db
+    namespace: decapod-db
     server: https://kubernetes.default.svc
   project: decapod-controller
   source:
