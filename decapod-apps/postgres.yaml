@@ -2,10 +2,10 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: postgres
-  namespace: argo
+  namespace: db
 spec:
   destination:
-    namespace: argo
+    namespace: db
     server: https://kubernetes.default.svc
   project: decapod-controller
   source:
@@ -14,7 +14,7 @@ spec:
     targetRevision: HEAD
   syncPolicy:
     syncOptions:
-    - CreateNamespace=false
+    - CreateNamespace=true
     automated:
       selfHeal: true
       prune: true
