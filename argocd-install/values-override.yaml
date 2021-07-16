@@ -1,4 +1,6 @@
 server:
+  extraArgs:
+    - --insecure
   configEnabled: true
   config:
     repositories: |
