@@ -1,22 +1,24 @@
 server:
+  extraArgs:
+    - --insecure
   configEnabled: true
   config:
     repositories: |
       - type: git
-        url: https://github.com/openinfradev/taco-bootstrap.git
+        url: https://github.com/openinfradev/decapod-bootstrap.git
       - name: argo-helm
         type: helm
         url: https://argoproj.github.io/argo-helm
   additionalApplications:
-    - name: taco-apps
+    - name: decapod-apps
       namespace: argo
       destination:
         namespace: argo
         server: https://kubernetes.default.svc
-      project: taco-bootstrap
+      project: decapod-bootstrap
       source:
-        path: taco-apps
-        repoURL: https://github.com/openinfradev/taco-bootstrap.git
+        path: decapod-apps
+        repoURL: https://github.com/openinfradev/decapod-bootstrap.git
         targetRevision: HEAD
         directory:
           recurse: true
@@ -25,15 +27,15 @@ server:
         automated:
           selfHeal: true
           prune: true
-    - name: taco-projects
+    - name: decapod-projects
       namespace: argo
       destination:
         namespace: argo
         server: https://kubernetes.default.svc
-      project: taco-bootstrap
+      project: decapod-bootstrap
       source:
-        path: taco-projects
-        repoURL: https://github.com/openinfradev/taco-bootstrap.git
+        path: decapod-projects
+        repoURL: https://github.com/openinfradev/decapod-bootstrap.git
         targetRevision: HEAD
         directory:
           recurse: true
@@ -43,11 +45,11 @@ server:
           selfHeal: true
           prune: true
   additionalProjects:
-  - name: taco-bootstrap
+  - name: decapod-bootstrap
     namespace: argo
     additionalLabels: {}
     additionalAnnotations: {}
-    description: Project for taco-bootstrap
+    description: Project for decapod-bootstrap
     sourceRepos:
     - '*'
     destinations:
