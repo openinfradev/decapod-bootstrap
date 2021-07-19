@@ -10,6 +10,8 @@ spec:
   destinations:
   - namespace: argo
     server: https://kubernetes.default.svc
+  - namespace: decapod-db
+    server: https://kubernetes.default.svc
   orphanedResources:
     warn: false
   sourceRepos:

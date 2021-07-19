@@ -57,6 +57,8 @@ server:
     destinations:
     - namespace: argo
       server: https://kubernetes.default.svc
+    - namespace: decapod-db
+      server: https://kubernetes.default.svc
     clusterResourceWhitelist:
     - group: '*'
       kind: '*'
