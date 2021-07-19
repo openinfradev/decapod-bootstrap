@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postgres
+  name: postgresql
   namespace: decapod-db
 spec:
   destination:
@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: decapod-controller
   source:
-    path: hanu-reference/decapod-controller/postgres
+    path: hanu-reference/decapod-controller/postgresql
     repoURL: https://github.com/openinfradev/decapod-manifests.git
     targetRevision: HEAD
   syncPolicy:
