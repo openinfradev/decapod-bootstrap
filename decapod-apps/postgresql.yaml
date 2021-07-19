@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: postgresql
-  namespace: decapod-db
+  namespace: argo
 spec:
   destination:
     namespace: decapod-db
@@ -14,7 +14,7 @@ spec:
     targetRevision: HEAD
   syncPolicy:
     syncOptions:
-    - CreateNamespace=true
+    - CreateNamespace=false
     automated:
       selfHeal: true
       prune: true
