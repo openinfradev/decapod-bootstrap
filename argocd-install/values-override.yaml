@@ -1,4 +1,6 @@
 server:
+  service:
+    type: NodePort
   extraArgs:
     - --insecure
   configEnabled: true
