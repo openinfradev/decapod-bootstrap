@@ -1,6 +1,6 @@
 server:
   service:
-    type: NodePort
+    type: LoadBalancer
   extraArgs:
     - --insecure
   configEnabled: true
