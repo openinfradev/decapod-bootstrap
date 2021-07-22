@@ -53,7 +53,7 @@ $ kubectl create ns decapod-db
 (chart location: https://artifacthub.io/packages/helm/argo/argo-cd)
 ```
 $ helm repo add argo https://argoproj.github.io/argo-helm
-$ helm install argo-cd argo/argo-cd --version 3.9.0 -f ./decapod-bootstrap/argocd-install/values-override.yaml
+$ helm install argo-cd argo/argo-cd --version 3.9.0 -f ./decapod-bootstrap/argocd-install/values-override.yaml -n argo
 ```
 Once argocd is installed, it creates the meta project and apps, which in turn, bootstraps actual decapod applications.
 
