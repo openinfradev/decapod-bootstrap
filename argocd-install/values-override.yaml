@@ -64,3 +64,8 @@ server:
       kind: '*'
     orphanedResources:
       warn: false
+  metrics.enabled: true
+dex.metrics.enabled: true
+controller.metrics.enabled: true
+repoServer.metrics.enabled: true
+redis-ha.haproxy.metrics.enabled:
