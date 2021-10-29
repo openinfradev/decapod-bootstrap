@@ -8,9 +8,6 @@ server:
     repositories: |
       - type: git
         url: https://github.com/openinfradev/decapod-bootstrap.git
-      - name: argo-helm
-        type: helm
-        url: https://argoproj.github.io/argo-helm
   additionalApplications:
     - name: decapod-apps
       namespace: argo
