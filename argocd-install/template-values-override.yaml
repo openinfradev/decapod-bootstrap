@@ -1,0 +1,69 @@
+server:
+  service:
+    type: NodePort
+  extraArgs:
+    - --insecure
+  configEnabled: true
+  config:
+    repositories: |
+      - type: git
+        url: ${DECAPOD_BOOTSTRAP_GIT_REPO_URL}
+  additionalApplications:
+    - name: decapod-apps
+      namespace: argo
+      destination:
+        namespace: argo
+        server: https://kubernetes.default.svc
+      project: decapod-bootstrap
+      source:
+        path: decapod-apps
+        repoURL: ${DECAPOD_BOOTSTRAP_GIT_REPO_URL}
+        targetRevision: HEAD
+        directory:
+          recurse: true
+          jsonnet: {}
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+    - name: decapod-projects
+      namespace: argo
+      destination:
+        namespace: argo
+        server: https://kubernetes.default.svc
+      project: decapod-bootstrap
+      source:
+        path: decapod-projects
+        repoURL: ${DECAPOD_BOOTSTRAP_GIT_REPO_URL}
+        targetRevision: HEAD
+        directory:
+          recurse: true
+          jsonnet: {}
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+  additionalProjects:
+  - name: decapod-bootstrap
+    namespace: argo
+    additionalLabels: {}
+    additionalAnnotations: {}
+    description: Project for decapod-bootstrap
+    sourceRepos:
+    - '*'
+    destinations:
+    - namespace: argo
+      server: https://kubernetes.default.svc
+    - namespace: decapod-db
+      server: https://kubernetes.default.svc
+    clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+    orphanedResources:
+      warn: false
+  metrics:
+    enabled: true
+dex.metrics.enabled: true
+controller.metrics.enabled: true
+repoServer.metrics.enabled: true
+redis-ha.haproxy.metrics.enabled: false

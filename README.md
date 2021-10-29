@@ -20,6 +20,7 @@ $ git clone https://github.com/openinfradev/decapod-bootstrap
 The repository structure looks as follows.
 ```
 ├── README.md
+├── genereate_yamls.sh
 ├── argocd-install
 │   └── values-override.yaml
 ├── decapod-apps
@@ -33,6 +34,8 @@ The repository structure looks as follows.
     └── decapod-controller.yaml
 ```
 
+* genereate_yamls.sh: create YAML files for bootstrapping if you don't use the default decapod git repository in github.com/openinfradev
+
 Directory contents
 * argocd-install: value-override file for argocd helm chart, which contains configuration to create the following (meta) project and app.
   * meta-project 'decapod-projects'
@@ -41,7 +44,6 @@ Directory contents
 * decapod-projects: directory for actual project manifest files. Once any manifest file is added, it's detected by 'decapod-projects' project, and created as argocd project.
 
 * decapod-apps: directory for actual application manifest files. Once any manifest file is added, it's detected by 'decapod-apps' project, and created as argocd application.
-
 
 ### Create namespaces
 ```
