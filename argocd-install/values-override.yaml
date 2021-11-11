@@ -1,3 +1,6 @@
+global:
+  image:
+    repository: quay.io/argoproj/argocd
 server:
   service:
     type: NodePort
@@ -63,7 +66,14 @@ server:
       warn: false
   metrics:
     enabled: true
-dex.metrics.enabled: true
+dex:
+  image:
+    repository: ghcr.io/dexidp/dex
+  metrics:
+    enabled: true
+redis:
+  image:
+    repository: docker.io/library/redis
 controller.metrics.enabled: true
 repoServer.metrics.enabled: true
 redis-ha.haproxy.metrics.enabled: false
