@@ -11,6 +11,24 @@ server:
     repositories: |
       - type: git
         url: ${DECAPOD_BOOTSTRAP_GIT_REPO_URL}
+    resource.customizations: |
+      jaegertracing.io/Jaeger:
+        ignoreDifferences: |
+          jsonPointers:
+          - /spec/collector/resources
+        health.lua: |
+          health_status = {}
+          health_status.status = "Healthy"
+          health_status.message = "Jaeger Controlplane is Running"
+          return health_status
+    resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
+      jqPathExpressions:
+      - '.webhooks[]?.clientConfig.caBundle'
+      - '.webhooks[]?.failurePolicy'
+    resource.customizations.ignoreDifferences.admissionregistration.k8s.io_ValidatingWebhookConfiguration: |
+      jqPathExpressions:
+      - '.webhooks[]?.clientConfig.caBundle'
+      - '.webhooks[]?.failurePolicy'
   additionalApplications:
     - name: decapod-apps
       namespace: argo
