@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: decapod-controller
   source:
-    path: hanu-reference/decapod-controller/postgresql
+    path: decapod-reference/decapod-controller/postgresql
     repoURL: https://github.com/openinfradev/decapod-manifests.git
     targetRevision: HEAD
   syncPolicy:
