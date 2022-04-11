@@ -2,7 +2,7 @@
 
 set -e
 
-DECAPOD_SITE_NAME="hanu-reference"
+DECAPOD_SITE_NAME="decapod-reference"
 DECAPOD_BOOTSTRAP_GIT_REPO_URL="https://github.com/openinfradev/decapod-bootstrap.git"
 DECAPOD_MANIFESTS_GIT_REPO_URL="https://github.com/openinfradev/decapod-manifests.git"
 
