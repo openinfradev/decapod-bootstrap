@@ -10,13 +10,15 @@ DOCKER_IMAGE_REPO="docker.io"
 QUAY_IMAGE_REPO="quay.io"
 GITHUB_IMAGE_REPO="ghcr.io"
 
+GIT_REVISION="HEAD"
+
 function usage {
-        echo -e "\nUsage: $0 [--site SITE_NAME] [--bootstrap-git BOOTSTRAP_GIT_URL ] [--manifests-git MANIFESTS_GIT_URL] [--registry REGISTRY_URL]"
+        echo -e "\nUsage: $0 [--site SITE_NAME] [--bootstrap-git BOOTSTRAP_GIT_URL ] [--manifests-git MANIFESTS_GIT_URL] [--git-rev GIT_REVISION] [--registry REGISTRY_URL]"
         exit 1
 }
 
 # We use "$@" instead of $* to preserve argument-boundary information
-ARGS=$(getopt -o 's:b:m:r:h' --long 'site:,bootstrap-git:,manifests-git:,registry:,help' -- "$@") || usage
+ARGS=$(getopt -o 's:b:m:g:r:h' --long 'site:,bootstrap-git:,manifests-git:,git-rev:,registry:,help' -- "$@") || usage
 eval "set -- $ARGS"
 
 while true; do
@@ -29,6 +31,8 @@ while true; do
             DECAPOD_BOOTSTRAP_GIT_REPO_URL=$2; shift 2;;
       (-m|--manifests-git)
             DECAPOD_MANIFESTS_GIT_REPO_URL=$2; shift 2;;
+      (-g|--git-rev)
+            GIT_REVISION=$2; shift 2;;
       (-r|--registry)
             DOCKER_IMAGE_REPO=$2
 	    QUAY_IMAGE_REPO=$2
@@ -41,6 +45,7 @@ done
 export DECAPOD_SITE_NAME
 export DECAPOD_BOOTSTRAP_GIT_REPO_URL
 export DECAPOD_MANIFESTS_GIT_REPO_URL
+export GIT_REVISION
 export DOCKER_IMAGE_REPO
 export QUAY_IMAGE_REPO
 export GITHUB_IMAGE_REPO
@@ -49,6 +54,7 @@ echo "=== Create YAML files using the following Decapod configuration. For help,
 echo " Site: "$DECAPOD_SITE_NAME
 echo " Bootstrap Git: "$DECAPOD_BOOTSTRAP_GIT_REPO_URL
 echo " Manifests Git: "$DECAPOD_MANIFESTS_GIT_REPO_URL
+echo " Git Revision: "$GIT_REVISION
 
 DIRS="argocd-install decapod-apps-templates"
 for dir in $DIRS
