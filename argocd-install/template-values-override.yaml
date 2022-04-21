@@ -39,7 +39,7 @@ server:
       source:
         path: decapod-apps
         repoURL: ${DECAPOD_BOOTSTRAP_GIT_REPO_URL}
-        targetRevision: HEAD
+        targetRevision: ${GIT_REVISION}
         directory:
           recurse: true
           jsonnet: {}
@@ -56,7 +56,7 @@ server:
       source:
         path: decapod-projects
         repoURL: ${DECAPOD_BOOTSTRAP_GIT_REPO_URL}
-        targetRevision: HEAD
+        targetRevision: ${GIT_REVISION}
         directory:
           recurse: true
           jsonnet: {}

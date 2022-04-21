@@ -39,7 +39,7 @@ server:
       source:
         path: decapod-apps
         repoURL: https://github.com/openinfradev/decapod-bootstrap.git
-        targetRevision: HEAD
+        targetRevision: release-v2
         directory:
           recurse: true
           jsonnet: {}
@@ -56,7 +56,7 @@ server:
       source:
         path: decapod-projects
         repoURL: https://github.com/openinfradev/decapod-bootstrap.git
-        targetRevision: HEAD
+        targetRevision: release-v2
         directory:
           recurse: true
           jsonnet: {}
