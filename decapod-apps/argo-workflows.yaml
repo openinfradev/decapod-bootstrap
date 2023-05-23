@@ -11,7 +11,7 @@ spec:
   source:
     path: decapod-reference/decapod-controller/argo-workflows-operator
     repoURL: https://github.com/openinfradev/decapod-manifests.git
-    targetRevision: release-v2
+    targetRevision: main
   syncPolicy:
     syncOptions:
     - CreateNamespace=false

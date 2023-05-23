@@ -10,7 +10,7 @@ DOCKER_IMAGE_REPO="docker.io"
 QUAY_IMAGE_REPO="quay.io"
 GITHUB_IMAGE_REPO="ghcr.io"
 
-GIT_REVISION="HEAD"
+GIT_REVISION="main"
 
 function usage {
         echo -e "\nUsage: $0 [--site SITE_NAME] [--bootstrap-git BOOTSTRAP_GIT_URL ] [--manifests-git MANIFESTS_GIT_URL] [--git-rev GIT_REVISION] [--registry REGISTRY_URL]"
