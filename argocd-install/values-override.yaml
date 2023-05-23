@@ -21,6 +21,14 @@ server:
           health_status.status = "Healthy"
           health_status.message = "Jaeger Controlplane is Running"
           return health_status
+      cluster.x-k8s.io/MachinePool:
+        ignoreDifferences: |
+          jsonPointers:
+          - /spec/replicas
+      cluster.x-k8s.io/MachineDeployment:
+        ignoreDifferences: |
+          jsonPointers:
+          - /spec/replicas
     resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
       jqPathExpressions:
       - '.webhooks[]?.clientConfig.caBundle'
@@ -39,7 +47,7 @@ server:
       source:
         path: decapod-apps
         repoURL: https://github.com/openinfradev/decapod-bootstrap.git
-        targetRevision: release-v2
+        targetRevision: main
         directory:
           recurse: true
           jsonnet: {}
@@ -56,7 +64,7 @@ server:
       source:
         path: decapod-projects
         repoURL: https://github.com/openinfradev/decapod-bootstrap.git
-        targetRevision: release-v2
+        targetRevision: main
         directory:
           recurse: true
           jsonnet: {}
