@@ -21,6 +21,14 @@ server:
           health_status.status = "Healthy"
           health_status.message = "Jaeger Controlplane is Running"
           return health_status
+      cluster.x-k8s.io/MachinePool:
+        ignoreDifferences: |
+          jsonPointers:
+          - /spec/replicas
+      cluster.x-k8s.io/MachineDeployment:
+        ignoreDifferences: |
+          jsonPointers:
+          - /spec/replicas
     resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
       jqPathExpressions:
       - '.webhooks[]?.clientConfig.caBundle'
