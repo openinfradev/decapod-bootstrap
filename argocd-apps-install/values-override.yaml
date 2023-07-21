@@ -1,0 +1,52 @@
+applications:
+  - name: decapod-apps
+    namespace: argo
+    destination:
+      namespace: argo
+      server: https://kubernetes.default.svc
+    project: decapod-bootstrap
+    source:
+      path: decapod-apps
+      repoURL: https://github.com/openinfradev/decapod-bootstrap.git
+      targetRevision: main
+      directory:
+        recurse: true
+        jsonnet: {}
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true
+  - name: decapod-projects
+    namespace: argo
+    destination:
+      namespace: argo
+      server: https://kubernetes.default.svc
+    project: decapod-bootstrap
+    source:
+      path: decapod-projects
+      repoURL: https://github.com/openinfradev/decapod-bootstrap.git
+      targetRevision: main
+      directory:
+        recurse: true
+        jsonnet: {}
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true
+
+projects:
+- name: decapod-bootstrap
+  namespace: argo
+  additionalLabels: {}
+  additionalAnnotations: {}
+  description: Project for decapod-bootstrap
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: argo
+    server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  orphanedResources:
+    warn: false

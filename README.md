@@ -3,8 +3,10 @@
 This repo includes materials to bootstrap decapod controllers using app of apps pattern.
 Currently the following applications are bootstrapped by default.
 * argo-cd
-* postgresql
 * argo-workflow
+
+## Prerequisite
+* Postgresql Database
 
 ## Installation
 
@@ -23,12 +25,12 @@ The repository structure looks as follows.
 ├── genereate_yamls.sh
 ├── argocd-install
 │   └── values-override.yaml
+├── argocd-apps-install
+│   └── values-override.yaml
 ├── decapod-apps
 │   ├── README.md
 │   ├── argo-workflows.yaml
-│   ├── db-secret-decapod-db.yaml
 │   ├── db-secret-argo.yaml
-│   └── postgresql.yaml
 └── decapod-projects
     ├── README.md
     └── decapod-controller.yaml
@@ -48,23 +50,19 @@ Directory contents
 ### Create namespaces
 ```
 $ kubectl create ns argo
-$ kubectl create ns decapod-db
 ```
 
 ### Install argo-cd using helm-chart /w value-override file
 (chart location: https://artifacthub.io/packages/helm/argo/argo-cd)
 ```
 $ helm repo add argo https://argoproj.github.io/argo-helm
-$ helm install argo-cd argo/argo-cd --version 3.33.6 -f ./decapod-bootstrap/argocd-install/values-override.yaml -n argo
+$ helm install argo-cd argo/argo-cd --version 5.41.1 -f ./decapod-bootstrap/argocd-install/values-override.yaml -n argo
+$ helm install argo-cd-apps argo/argo-cd-apps --version 1.3.0 -f ./decapod-bootstrap/argocd-apps-install/values-override.yaml -n argo
 ```
-Once argocd is installed, it creates the meta project and apps, which in turn, bootstraps actual decapod applications.
+Once argocd and argocd-apps is installed, it creates the meta project and apps, which in turn, bootstraps actual decapod applications.
 
 ### Watch for applications to bootstrap automatically
 ```
-$ kubectl get pods -n decapod-db
-NAME                      READY   STATUS    RESTARTS   AGE
-postgresql-postgresql-0   1/1     Running   0          4m10s
-
 $ kubectl get pods -n argo
 NAME                                                           READY   STATUS             RESTARTS   AGE
 argo-cd-argocd-application-controller-7bc75f949c-svrnk         1/1     Running            0          5m34s

@@ -37,59 +37,6 @@ server:
       jqPathExpressions:
       - '.webhooks[]?.clientConfig.caBundle'
       - '.webhooks[]?.failurePolicy'
-  additionalApplications:
-    - name: decapod-apps
-      namespace: argo
-      destination:
-        namespace: argo
-        server: https://kubernetes.default.svc
-      project: decapod-bootstrap
-      source:
-        path: decapod-apps
-        repoURL: https://github.com/openinfradev/decapod-bootstrap.git
-        targetRevision: main
-        directory:
-          recurse: true
-          jsonnet: {}
-      syncPolicy:
-        automated:
-          selfHeal: true
-          prune: true
-    - name: decapod-projects
-      namespace: argo
-      destination:
-        namespace: argo
-        server: https://kubernetes.default.svc
-      project: decapod-bootstrap
-      source:
-        path: decapod-projects
-        repoURL: https://github.com/openinfradev/decapod-bootstrap.git
-        targetRevision: main
-        directory:
-          recurse: true
-          jsonnet: {}
-      syncPolicy:
-        automated:
-          selfHeal: true
-          prune: true
-  additionalProjects:
-  - name: decapod-bootstrap
-    namespace: argo
-    additionalLabels: {}
-    additionalAnnotations: {}
-    description: Project for decapod-bootstrap
-    sourceRepos:
-    - '*'
-    destinations:
-    - namespace: argo
-      server: https://kubernetes.default.svc
-    - namespace: decapod-db
-      server: https://kubernetes.default.svc
-    clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
-    orphanedResources:
-      warn: false
   metrics:
     enabled: true
 dex:
@@ -100,6 +47,12 @@ dex:
 redis:
   image:
     repository: docker.io/library/redis
-controller.metrics.enabled: true
-repoServer.metrics.enabled: true
-redis-ha.haproxy.metrics.enabled: false
+controller:
+  metrics:
+    enabled: true
+repoServer:
+  metrics:
+    enabled: true
+redis-ha.haproxy:
+  metrics:
+    enabled: true
