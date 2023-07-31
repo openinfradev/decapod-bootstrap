@@ -56,7 +56,7 @@ echo " Bootstrap Git: "$DECAPOD_BOOTSTRAP_GIT_REPO_URL
 echo " Manifests Git: "$DECAPOD_MANIFESTS_GIT_REPO_URL
 echo " Git Revision: "$GIT_REVISION
 
-DIRS="argocd-install decapod-apps-templates"
+DIRS="argocd-install argocd-apps-install decapod-apps-templates"
 for dir in $DIRS
 do
 	if [[ -z $(ls | grep ${dir}) ]]
