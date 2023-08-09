@@ -29,6 +29,12 @@ server:
         ignoreDifferences: |
           jsonPointers:
           - /spec/replicas
+      monitoring.coreos.com/Prometheus:
+        health.lua: |
+          health_status = {}
+          health_status.status = "Healthy"
+          health_status.message = "Prometheus is deployed"
+          return health_status
     resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
       jqPathExpressions:
       - '.webhooks[]?.clientConfig.caBundle'
