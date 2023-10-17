@@ -29,6 +29,19 @@ server:
         ignoreDifferences: |
           jsonPointers:
           - /spec/replicas
+        health.lua: |
+          hs = {}
+          if obj.spec ~= nil and obj.status ~= nil then
+            if obj.spec.replicas == obj.status.replicas then
+              hs.status = "Healthy"
+              hs.message = "All machines targeted by this deployment were created"
+              return hs
+            end
+          end
+
+          hs.status = "Progressing"
+          hs.message = "Waiting for machines for this deployment"
+          return hs
       monitoring.coreos.com/Prometheus:
         health.lua: |
           health_status = {}
